@@ -4,9 +4,8 @@ import QmlProject 1.1
 
 Project {
 
-    mainFile: "main.qml"
+    //mainFile: "main.qml"
 
-    /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
         directory: "."
     }
@@ -18,6 +17,11 @@ Project {
     ImageFiles {
         directory: "."
     }
+
+    /*Files {
+        filter: "qmldir"
+        directory: "."
+    }*/
 
     /*Files {
         filter: "*.conf"
@@ -39,7 +43,7 @@ Project {
     }
 
     /* List of plugin directories passed to QML runtime */
-    importPaths: [ "imports", "asset_imports" ]
+    importPaths: ["D:/Nff.App/Modules"]
 
     /* Required for deployment */
     targetDirectory: "/opt/EditWithQDS"

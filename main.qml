@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import MaterialDesignIcons 1.0
+
 
 Pane{
     Material.theme: themeSwitch.checked?  Material.Dark : Material.Light
@@ -23,7 +25,16 @@ Pane{
         Image{
             width: parent.width
             height: width
-            source: "icon.png"
+            source: "source:///icon.png"
+        }
+
+        Text{
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.family: MaterialDesignIcons.fontFamily
+            font.pixelSize: 50
+            color: Material.foreground
+            text: MaterialDesignIcons.getGlyph("github")
+
         }
 
 
@@ -44,14 +55,15 @@ Pane{
             }
         }
 
-        Canvas{
+
+        /*Canvas{
             id: canvas
             width: 200
             height: 200
             onPaint: {
 
                 var ctx = canvas.getContext('2d')
-                ctx.fillStyle = "#b40000"
+                ctx.fillStyle = "#b4ff00"
 
                 ctx.beginPath();
                 ctx.moveTo(75,40);
@@ -85,7 +97,7 @@ Pane{
                 }
 
             }
-        }
+        }*/
 
         TextField{
             topPadding: 20
@@ -103,8 +115,28 @@ Pane{
             from: 50
             to: 200
             stepSize: 5
-
             snapMode :"SnapAlways"
+        }
+
+        Label{
+            text: "Time : "+timeSlider.value
+        }
+        Slider{
+            id: timeSlider
+            padding: 0
+            width: parent.width
+            from: 1
+            to: 60
+            stepSize: 1
+            snapMode :"SnapAlways"
+        }
+
+        Timer{
+            id: timer
+            interval: 1000*timeSlider.value
+            onTriggered: {
+                checkBox.checked = !checkBox.checked
+            }
         }
 
 
@@ -119,7 +151,7 @@ Pane{
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Do"
             onClicked: {
-                console.log("Hello")
+                timer.start()
 
             }
         }
